@@ -23,11 +23,23 @@
         <div class="col-md-12">
           <div class="card">
         
-              <form method="post" action="{{route('admin.info.setting')}}">
+              <form method="post" action="{{route('admin.info.setting')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                   <p class="text-uppercase text-sm">Basic Information</p>
                   <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Profile Image (Must be in KB)</label>
+                        <input class="form-control dropify" type="file"  name="profile_img"  data-default-file="{{asset(Helper::settingValue('profile_img'))}}">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Cover Image (Must be in KB)  </label>
+                        <input class="form-control dropify" type="file"  name="cover_img"  data-default-file="{{asset(Helper::settingValue('cover_img'))}}">
+                      </div>
+                    </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Name</label>

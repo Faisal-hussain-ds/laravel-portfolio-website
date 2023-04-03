@@ -57,22 +57,7 @@
                           </div>
                         </td>
                       </tr>
-                      <tr class="text-center ml-auto">
-                        <td>
-                          <div class="d-flex px-2 py-1">
-                            <h5>Contact Page</h5>
-                          </div>
-                        </td>
-                        <td class="">
-                        </td>
-                        <td class="">
-                        </td>
-                        <td class="ml-auto text-center d-flex">
-                          <div class="d-flex px-2 py-1">
-                              <button class="btn btn-sm btn-success" >Contact Setting</button>
-                          </div>
-                        </td>
-                      </tr>
+                     
                     
                     </tbody>
                   </table>

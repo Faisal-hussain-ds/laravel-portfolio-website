@@ -14,7 +14,7 @@ class SettingController extends Controller
 {
     public function saveInfoSettings(Request $request)
     {
-        
+        $directory="/upload/settings/images/";
         foreach ($request->all() as $key => $value) {
             // Skip the CSRF token
             if ($key == '_token') {
@@ -24,9 +24,10 @@ class SettingController extends Controller
             // Check if the value is a file
             if ($request->hasFile($key)) {
                 $file = $request->file($key);
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('public/uploads', $filename);
-                $value = '/storage/uploads/' . $filename;
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path($directory), $fileName);
+                $value= $directory . $fileName;
+                   
             }
     
             // Check if the key already exists in the database

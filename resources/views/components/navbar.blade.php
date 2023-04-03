@@ -24,5 +24,7 @@
         <a href="{{Helper::settingValue('linkedin_link')}}" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
 
+      <img src="{{Helper::settingValue('cover_img')}}" class="w-100 cover_img">
+
     </div>
   </header>
