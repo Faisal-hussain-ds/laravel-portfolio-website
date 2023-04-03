@@ -18,7 +18,7 @@
               <div class="portfolio-info">
                 <div class="portfolio-links">
                   <a href="{{asset($file->img)}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                 
                 </div>
               </div>
             </div>

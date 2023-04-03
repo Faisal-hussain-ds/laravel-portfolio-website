@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\UserContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,8 @@ Route::name('admin.skill.setting.')->prefix('portfolio/setting/about')->group(fu
     
 });
 
+// save user query from contact us page
+Route::post('/contact-us', [UserContactController::class,'userQuery'])->name('user.query');
 
 
 Route::get('/', function () {

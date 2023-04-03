@@ -38,6 +38,12 @@
 
     @include('components.footer')
 
+    <script>
+      $('#send-message').on('click',function(){
+        $("#contactUs-form").submit();
+      })
+    </script>
+
 </body>
 
 </html>
