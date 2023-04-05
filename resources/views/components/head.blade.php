@@ -31,4 +31,12 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+
+  <!-- this is masanry item width on portfolio section -->
+<style>
+
+  .grid-item { width: 400px; }
+  .grid-item--width2 { width: 400px; }
+</style>
 </head>
