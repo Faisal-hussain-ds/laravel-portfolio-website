@@ -34,7 +34,7 @@ body::before {
   height: auto;
   position: absolute;
   left: 60%;
-  top: 5%;
+  top: 15%;
 }
 @media (min-width: 1024px) {
   body::before {
@@ -203,6 +203,7 @@ h6 {
 .navbar {
   padding: 0;
   margin-top: 35px;
+  z-index:1000;
 }
 
 .navbar ul {
