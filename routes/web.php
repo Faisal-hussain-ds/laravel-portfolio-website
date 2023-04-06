@@ -40,7 +40,7 @@ Route::name('admin.')->prefix('portfolio')->middleware('auth')->group(function (
 
 
 // admin skill save route
-Route::name('admin.skill.setting.')->prefix('portfolio/setting/about')->group(function () {
+Route::name('admin.skill.setting.')->prefix('portfolio/setting/about')->middleware('auth')->group(function () {
 
     Route::post('/save', [SettingController::class,'saveSkill'])->name('save');
     
@@ -54,15 +54,15 @@ Route::get('/', function () {
     return view('layouts.portfolio');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';
 
