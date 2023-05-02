@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -27,5 +28,20 @@ class DashboardController extends Controller
     public function portfolioPage()
     {
         return view ('admin.pages.portfolio');
+    }
+    public function usersPage()
+    {
+        $users=User::orderBy('id','desc')->get()->groupBy('type');
+        return view('admin.user.list',get_defined_vars());
+    }
+    public function createUser()
+    {
+       
+        return view('admin.user.create');
+    }
+    public function editUser($id)
+    {
+       $user=User::findOrfail($id);
+        return view('admin.user.edit',get_defined_vars());
     }
 }

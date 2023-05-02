@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\Skill;
 use App\Models\Portfolio;
+use App\Models\Department;
+use App\Models\User;
 use Illuminate\Support\Collection;
 use File;
+use Hash;
 
 class SettingController extends Controller
 {
@@ -53,15 +56,57 @@ class SettingController extends Controller
     {
         if($request->id)
         {
-            $skill=Skill::find($request->id);
+            $skill=Department::find($request->id);
         }else{
-            $skill= new Skill();
+            $skill= new Department();
         }
 
         $skill->name=$request->input('name');
-        $skill->value=$request->input('value');
         $skill->save();
-        return redirect()->route('admin.pages.setting.about');
+        return redirect()->route('admin.dashboard');
+    }
+    public function deleteSkill(Request $request,$id)
+    {
+        $skill=Department::findOrfail($id);
+        
+        $skill->delete();
+        return redirect()->route('admin.dashboard');
+    }
+    public function saveUser(Request $request)
+    {
+  
+        if($request->id)
+        {
+            $request->validate([
+                'name'=>'required',
+                'type'=>'required',
+            ]);
+            $user= User::findOrfail($request->id)->Update([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'temp_password'=>$request->password,
+                'password'=>Hash::make($request->password),
+                'type'=>$request->type,
+            ]);
+        }else{
+            $request->validate([
+                'name'=>'required',
+                'email'=>['required','email','max:255','unique:users'],
+                'password'=>['string','min:6'],
+                'type'=>'required',
+            ]);
+            $user= User::create([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'temp_password'=>$request->password,
+                'password'=>Hash::make($request->password),
+                'type'=>$request->type,
+            ]);
+        }
+       
+    
+        // return view ('admin.pages.users',get_defined_vars());
+        return redirect()->route('admin.user.list');
     }
     public function portfolioSettings(Request $request)
     {

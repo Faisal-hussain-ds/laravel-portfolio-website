@@ -22,7 +22,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/img/apple-icon.png')}}">
   <link rel="icon" type="image/png" href="{{asset('admin/assets/img/favicon.png')}}">
   <title>
-    Faisal's Portfolio Dashboard
+     Dashboard
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -56,9 +56,28 @@
 
 
 
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <div class="min-height-300 bg-primary position-absolute w-100">
+    
+  </div>
 
-    @include('components.admin.sidebar')
+    @if(Auth::user()->type=='admin')
+    {
+      @include('components.admin.admin-sidebar')
+    }
+    @elseif(Auth::user()->type=='head')
+    {
+      @include('components.admin.head-sidebar')
+    }
+    @elseif(Auth::user()->type=='supervisor')
+    {
+      @include('components.admin.supervisor-sidebar')
+    }
+    @else
+    {
+      @include('components.admin.student-sidebar')
+    }
+    @endif
+   
 
   <main class="main-content position-relative border-radius-lg ">
   
@@ -74,7 +93,7 @@
   <script type="text/javascript">
  
      $('.show_confirm').click(function(event) {
-          var form =  $(this).closest("form");
+          var form =  $(this).data("url");
           event.preventDefault();
           swal({
               title: `Are you sure you want to delete this record?`,
@@ -86,6 +105,8 @@
           .then((willDelete) => {
             if (willDelete) {
               // form.submit();
+
+              window.location.href=form;
             }
           });
       });

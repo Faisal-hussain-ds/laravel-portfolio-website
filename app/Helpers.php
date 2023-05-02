@@ -3,6 +3,8 @@
 use App\Models\Setting;
 use App\Models\Skill;
 use App\Models\Portfolio;
+use App\Models\Department;
+use App\Models\User;
 
 class Helper {
 
@@ -17,6 +19,20 @@ class Helper {
     public static function getSkills()
     {
         return Skill::all();
+    }
+    public static function getDepartments()
+    {
+        return Department::all();
+    }
+    public static function getUsers($type)
+    {
+        if($type=='All')
+        {
+            $users=User::orderBy('id','desc');
+        }else{
+            $users=User::where('type',$type)->orderBy('id','desc');
+        }
+        return $users->get();
     }
 
     public static function uploadFile($file,$directory)
