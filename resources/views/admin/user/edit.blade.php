@@ -47,9 +47,9 @@
                           <label for="example-text-input" class="form-control-label type">Type</label>
                             <select class="form-select" name="type">
                               
-                                <option @if($user->type=='admin') selected @endif value="admin">Admin</option>
+                       
                                 <option @if($user->type=='student') selected @endif  value="student">Student</option>
-                                <option @if($user->type=='head') selected @endif  value="head">Head</option>
+                    
                                 <option @if($user->type=='supervisor') selected @endif  value="supervisor">Supervisor</option>
                             </select>
                         </div>

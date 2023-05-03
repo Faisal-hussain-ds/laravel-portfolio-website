@@ -63,14 +63,14 @@ class SettingController extends Controller
 
         $skill->name=$request->input('name');
         $skill->save();
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('message','Department Save Successfully');
     }
     public function deleteSkill(Request $request,$id)
     {
         $skill=Department::findOrfail($id);
         
         $skill->delete();
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('message','Department has been Deleted Successfully');
     }
     public function saveUser(Request $request)
     {
@@ -106,7 +106,7 @@ class SettingController extends Controller
        
     
         // return view ('admin.pages.users',get_defined_vars());
-        return redirect()->route('admin.user.list');
+        return redirect()->route('admin.user.list')->with('message','User Save Successfully');;
     }
     public function portfolioSettings(Request $request)
     {

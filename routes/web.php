@@ -22,6 +22,7 @@ Route::name('admin.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
     Route::get('/profile', [DashboardController::class,'profile'])->name('profile');
     Route::get('/pages', [DashboardController::class,'pages'])->name('pages');
+    Route::get('/request/detail/{id}', [DashboardController::class,'requestDetail'])->name('request.detail');
 
 
 
@@ -29,7 +30,7 @@ Route::name('admin.')->middleware('auth')->group(function () {
 
         Route::get('/create', [DashboardController::class,'createUser'])->name('create');
         Route::get('/edit/{id}', [DashboardController::class,'editUser'])->name('edit');
-        Route::get('/users', [DashboardController::class,'usersPage'])->name('list');
+        Route::get('/', [DashboardController::class,'usersPage'])->name('list');
       
         
     });
@@ -61,9 +62,12 @@ Route::name('admin.skill.setting.')->prefix('portfolio/setting/about')->middlewa
 Route::post('/contact-us', [UserContactController::class,'userQuery'])->name('user.query');
 
 
-Route::get('/', function () {
+Route::get('/internship-request', function () {
     return view('layouts.portfolio');
-});
+})->middleware('auth');
+Route::get('/', function () {
+    return view('auth.login');
+})->middleware('auth','guest');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -73,6 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/review/request', [DashboardController::class, 'reviewRequest'])->name('request.review');
 });
 
 require __DIR__.'/auth.php';

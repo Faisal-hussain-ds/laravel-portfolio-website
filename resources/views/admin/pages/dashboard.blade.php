@@ -15,7 +15,7 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Requests</p>
                     <h5 class="font-weight-bolder">
-                      53,000
+                      {{count(Helper::getRequests())}}
                     </h5>
                     
                   </div>
@@ -59,7 +59,7 @@
               <div class="card-header pb-0 d-flex justify-content-between">
                 <h6>Departments</h6>
 
-                <button type="button" class="btn btn-sm btn-success add-edit-skill" data-title="Department" data-id="" data-name="Department name" data-value="100">Add Skill</button>
+                <button type="button" class="btn btn-sm btn-success add-edit-skill" data-title="Department" data-id="" data-name="Department name" data-value="100">Add Department</button>
 
               </div>
               <div class="card-body px-0 pt-0 pb-2">

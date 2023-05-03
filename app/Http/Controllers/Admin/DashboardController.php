@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\InternshipRequest;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -19,7 +21,58 @@ class DashboardController extends Controller
     }
     public function pages()
     {
-        return view ('admin.pages.pages_setting');
+        if(Auth::user()->type=='student')
+        {
+            $data=InternshipRequest::where('user_id',Auth::id())->get();
+        } else if(Auth::user()->type=='supervisor')
+        {
+            $data=InternshipRequest::where('assign_to',Auth::id())->get();
+        }
+        else{
+            $data=InternshipRequest::all();
+        }
+        
+        return view ('admin.pages.pages_setting',get_defined_vars());
+    }
+    public function requestDetail($id)
+    {
+        $id=decrypt($id);
+        $data=InternshipRequest::with('user','head','supervisor')->findOrfail($id);
+
+        $data=$data->toArray();
+        return view ('admin.pages.request_detail',get_defined_vars());
+    }
+    public function reviewRequest(Request $request)
+    {
+    //   dd($request->all());
+
+    $data=InternshipRequest::findOrfail($request->id);
+   
+    if($request->status=='approved')
+    {
+        $request->validate([
+            'supervisor'=>'required',
+            'id'=>'required',
+          ]);
+
+          $data->assign_to=$request->supervisor;
+    }else{
+
+        $request->validate([
+            'id'=>'required',
+          ]);
+
+          $data->assign_to=Null;
+
+    }
+    $data->checked_by=Auth::id();
+    $data->comments=$request->comments;
+    $data->status=$request->status;
+
+    $data->save();
+        
+        
+        return redirect()->route('admin.pages')->with('message','Request has been reviewed Successfully');
     }
     public function aboutPage()
     {

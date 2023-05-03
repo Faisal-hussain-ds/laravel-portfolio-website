@@ -47,9 +47,7 @@
                           <label for="example-text-input" class="form-control-label type">Type</label>
                             <select class="form-select" name="type">
                               
-                                <option value="admin">Admin</option>
                                 <option value="student">Student</option>
-                                <option value="head">Head</option>
                                 <option value="supervisor">Supervisor</option>
                             </select>
                         </div>

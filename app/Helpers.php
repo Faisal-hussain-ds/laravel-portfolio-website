@@ -5,6 +5,7 @@ use App\Models\Skill;
 use App\Models\Portfolio;
 use App\Models\Department;
 use App\Models\User;
+use App\Models\InternshipRequest;
 
 class Helper {
 
@@ -23,6 +24,10 @@ class Helper {
     public static function getDepartments()
     {
         return Department::all();
+    }
+    public static function getRequests()
+    {
+        return InternshipRequest::all();
     }
     public static function getUsers($type)
     {

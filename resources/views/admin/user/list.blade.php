@@ -54,7 +54,7 @@
                                         <td>{{$user->created_at->diffForHumans()}}</td>
                                         <td>
                                         <a class="btn btn-xs btn-info add-edit-user" type="button" href="{{route('admin.user.edit',$user->id)}}"> <i class="fa fa-pencil"></i></a>
-                                        <button class="btn btn-xs btn-danger show_confirm" type="button" data-url="{{route('admin.skill.setting.delete',$user->id)}}"><i class="fa fa-trash"></i></button>  
+                                       
                                         </td>
                                     </tr>
 
