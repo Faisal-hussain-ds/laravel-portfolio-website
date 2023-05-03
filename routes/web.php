@@ -19,7 +19,7 @@ use App\Http\Controllers\UserContactController;
 
 
 Route::name('admin.')->middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard')->middleware('roleType');
     Route::get('/profile', [DashboardController::class,'profile'])->name('profile');
     Route::get('/pages', [DashboardController::class,'pages'])->name('pages');
     Route::get('/request/detail/{id}', [DashboardController::class,'requestDetail'])->name('request.detail');
@@ -51,7 +51,7 @@ Route::name('admin.')->middleware('auth')->group(function () {
 
 
 // admin skill save route
-Route::name('admin.skill.setting.')->prefix('portfolio/setting/about')->middleware('auth')->group(function () {
+Route::name('admin.skill.setting.')->prefix('portfolio/setting/about')->middleware('auth','roleType')->group(function () {
 
     Route::post('/save', [SettingController::class,'saveSkill'])->name('save');
     Route::get('/delete/{id}', [SettingController::class,'deleteSkill'])->name('delete');
@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/review/request', [DashboardController::class, 'reviewRequest'])->name('request.review');
+    Route::post('/review/request', [DashboardController::class, 'reviewRequest'])->name('request.review')->middleware('roleType');
 });
 
 require __DIR__.'/auth.php';

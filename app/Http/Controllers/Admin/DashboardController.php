@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\InternshipRequest;
 use Auth;
+use App\Mail\InternshipStatusMail;
+use Mail;
 
 class DashboardController extends Controller
 {
@@ -46,32 +48,39 @@ class DashboardController extends Controller
     {
     //   dd($request->all());
 
-    $data=InternshipRequest::findOrfail($request->id);
-   
-    if($request->status=='approved')
-    {
-        $request->validate([
-            'supervisor'=>'required',
-            'id'=>'required',
-          ]);
+        $data=InternshipRequest::findOrfail($request->id);
+    
+        if($request->status=='approved')
+        {
+            $request->validate([
+                'supervisor'=>'required',
+                'id'=>'required',
+            ]);
 
-          $data->assign_to=$request->supervisor;
-    }else{
+            $data->assign_to=$request->supervisor;
+        }else{
 
-        $request->validate([
-            'id'=>'required',
-          ]);
+            $request->validate([
+                'id'=>'required',
+            ]);
 
-          $data->assign_to=Null;
+            $data->assign_to=Null;
 
-    }
-    $data->checked_by=Auth::id();
-    $data->comments=$request->comments;
-    $data->status=$request->status;
+        }
+        $data->checked_by=Auth::id();
+        $data->comments=$request->comments;
+        $data->status=$request->status;
 
-    $data->save();
+        $data->save();
+            
+        $mailData = [
+            'title' => 'Internship Request Status',
+            'body' => "Your internship request status has been updated  to  `$request->status`. Please visit your dashboard for further details.",
+
+        ];
         
-        
+        Mail::to(User::where('id',$data->user_id)->first()->email)->send(new InternshipStatusMail($mailData));
+            
         return redirect()->route('admin.pages')->with('message','Request has been reviewed Successfully');
     }
     public function aboutPage()
