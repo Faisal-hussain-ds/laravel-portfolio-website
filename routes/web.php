@@ -23,6 +23,8 @@ Route::name('admin.')->middleware('auth')->group(function () {
     Route::get('/profile', [DashboardController::class,'profile'])->name('profile');
     Route::get('/pages', [DashboardController::class,'pages'])->name('pages');
     Route::get('/request/detail/{id}', [DashboardController::class,'requestDetail'])->name('request.detail');
+    Route::get('/request/certificate/{id}', [DashboardController::class,'certificateRequest'])->name('request.certificate');
+    Route::post('/send/certificate', [DashboardController::class,'certificateEmail'])->name('send.certificate');
 
 
 

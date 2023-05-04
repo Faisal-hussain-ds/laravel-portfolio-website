@@ -1,7 +1,11 @@
 
 @extends('layouts.admin')
 @section('css')
-
+<style>
+  .bg-gray{
+    background-color: #cccc !important;
+  }
+</style>
 @endsection
 
 @section('content')
@@ -26,7 +30,7 @@
                     <tbody>
 
                       @foreach($data as $key => $item)
-                        @if($key!='id' && $key!='department_id' && $key!='user_id' && $key!='assign_to' && $key!='checked_by'  && $key!='user'  && $key!='head'  && $key!='supervisor')
+                        @if($key!='id' && $key!='department_id' && $key!='user_id' && $key!='assign_to' && $key!='checked_by'  && $key!='user' && $key!='supervisor_comments'  && $key!='head'  && $key!='supervisor')
                             <tr class="text-center ml-auto">
                                 <td>
                                 <div class="d-flex px-2 py-1">
@@ -53,6 +57,38 @@
                                 
                             </tr>
                         @endif
+                        @if($key=='user')
+                            <tr class="text-center ml-auto bg-gray">
+                                <td>
+                                <div class="d-flex px-2 py-1">
+                                  
+                                    <h5>Student Name</h5>
+                                   
+                                </div>
+                                </td>
+                                <td class="">
+                                   <span>{{$item['name']??'N/A'}}</span>
+                                </td>
+                                
+                            </tr>
+                        @endif
+                        @if($key=='supervisor')
+                            <tr class="text-center ml-auto bg-gray">
+                                <td>
+                                <div class="d-flex px-2 py-1">
+                                  
+                                    <h5>Supervisor Name</h5>
+                                   
+                                </div>
+                                </td>
+                                <td class="">
+                                   <span>{{$item['name']??'N/A'}}</span>
+                                </td>
+                                
+                            </tr>
+                        @endif
+
+                        
                         
                       @endforeach
                     </tbody>
@@ -135,10 +171,29 @@
                                           <input type="hidden" name="status" value="approved">
                                           <input type="hidden" name="id" value="{{$data['id']}}">
                                           <input type="hidden" name="supervisor" value="{{Auth::id()}}">
-                                          <textarea name="supervisor_comments" class="form-control mt-2" rows="6" placeholder="Share address , tips , guidelines etc"></textarea>
+                                          <textarea name="supervisor_comments" class="form-control mt-2 ckeditor" rows="6" placeholder="Share address , tips , guidelines etc">
+                                            {{$data['supervisor_comments']}}
+                                          </textarea>
 
                                           <button type="submit" class="btn btn-success mt-3">Send</button>
                                       </form>
+                        </div>
+                    <div class="col-md-2 col-2">
+                  
+                    </div>
+                </div>
+                @endif
+                @if( Auth::user()->type=='student')
+                <div class="row">
+                  
+                    <div class="col-md-2 col-2">
+                  
+                    </div>
+                        <div class="col-md-8 col-8">
+                          <b>Supervisor Comments</b>
+                          <textarea disabled name="supervisor_comments" class="form-control mt-2 ckeditor" rows="6" placeholder="Share address , tips , guidelines etc">
+                                            {{$data['supervisor_comments']}}
+                                          </textarea>
                         </div>
                     <div class="col-md-2 col-2">
                   

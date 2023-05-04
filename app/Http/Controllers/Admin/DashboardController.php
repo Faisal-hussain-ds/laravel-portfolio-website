@@ -8,7 +8,9 @@ use App\Models\User;
 use App\Models\InternshipRequest;
 use Auth;
 use App\Mail\InternshipStatusMail;
+use App\Mail\CertificateMail;
 use Mail;
+use PDF;
 
 class DashboardController extends Controller
 {
@@ -70,8 +72,16 @@ class DashboardController extends Controller
         $data->checked_by=Auth::id();
         $data->comments=$request->comments;
         $data->status=$request->status;
+        $data->supervisor_comments=$request->supervisor_comments;
 
         $data->save();
+
+
+       
+    
+
+
+
             
         $mailData = [
             'title' => 'Internship Request Status',
@@ -82,6 +92,31 @@ class DashboardController extends Controller
         Mail::to(User::where('id',$data->user_id)->first()->email)->send(new InternshipStatusMail($mailData));
             
         return redirect()->route('admin.pages')->with('message','Request has been reviewed Successfully');
+    }
+    public function certificateEmail(Request $request)
+    {
+     
+        $data=InternshipRequest::findOrfail(decrypt($request->internship_id));
+         $user=User::where('id',$data->user_id)->first();
+         $data2["email"] = $user->email;
+         $data2["title"] = "Certificate Email";
+         $data2["name"] =  $request->name ?? $user->name;
+         $data2["score"] =  $request->score??85;
+         $data2["start_date"] =  $request->start_date??'';
+         $data2["end_date"] =  $request->end_date??'';
+         $data2["course"] =  $request->course??'Web Development';
+
+    
+        $pdf = PDF::loadView('auth.certificate_email', $data2);
+        $data2["pdf"] = $pdf;
+  
+        Mail::to($data2["email"])->send(new CertificateMail($data2));
+        return redirect()->route('admin.pages')->with('message','Certificate has been sent Successfully');
+    }
+    public function certificateRequest($id)
+    {
+        $id=$id;
+        return view ('admin.pages.certificate_request',get_defined_vars());
     }
     public function aboutPage()
     {

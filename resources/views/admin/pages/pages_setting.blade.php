@@ -50,7 +50,10 @@
                             <td class="ml-auto text-end d-flex">
                               <div class="d-flex ">
                                   
-                                  <a class="btn btn-xs btn-info add-edit-user" type="button" href="{{route('admin.request.detail',encrypt($item->id))}}"> <i class="fa fa-eye"></i></a>
+                                  <a class="btn btn-xs btn-info add-edit-user" type="button" href="{{route('admin.request.detail',encrypt($item->id))}}"> <i class="fa fa-eye"></i> View Detail </a>
+                                  @if(Auth::user()->type=='supervisor')
+                                     <a class="btn btn-xs btn-warning add-edit-user" type="button" href="{{route('admin.request.certificate',encrypt($item->id))}}"> <i class="fa fa-star"></i> Send Certificate</a>
+                                  @endif
                               </div>
                             </td>
                           </tr>
