@@ -59,13 +59,14 @@
             </div>
 
             <div class="person">
-               {{ $mailData['name']??''}}
+           
+               {{ $data2['name']??''}}
             </div>
 
             <div class="reason">
-                for completing course of {{ $mailData['course']??''}}<br/>
-                From <span class="assignment">{{ $mailData['start_date']??''}} </span> To  <span class="assignment">{{ $mailData['end_date']??''}} </span><br/>
-                with score of <b> {{ $mailData['score']??''}}/100</b>
+                for completing course of {{ $data2['course']??''}}<br/>
+                From <span class="assignment">{{ $data2['start_date']??''}} </span> To  <span class="assignment">{{ $data2['end_date']??''}} </span><br/>
+                with score of <b> {{ $data2['score']??''}}/100</b>
             </div>
         </div>
     </body>

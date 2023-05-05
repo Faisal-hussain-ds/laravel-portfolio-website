@@ -53,6 +53,11 @@
                                   <a class="btn btn-xs btn-info add-edit-user" type="button" href="{{route('admin.request.detail',encrypt($item->id))}}"> <i class="fa fa-eye"></i> View Detail </a>
                                   @if(Auth::user()->type=='supervisor')
                                      <a class="btn btn-xs btn-warning add-edit-user" type="button" href="{{route('admin.request.certificate',encrypt($item->id))}}"> <i class="fa fa-star"></i> Send Certificate</a>
+                                     <a class="btn btn-xs btn-dark add-edit-user" type="button" href="{{route('admin.send.points',encrypt($item->id))}}"> <i class="fa fa-send"></i> Send Points</a>
+                                  @endif
+                                  @if(Auth::user()->type=='student')
+                                     
+                                     <a class="btn btn-xs btn-dark add-edit-user" type="button" href="{{route('admin.send.points',encrypt($item->id))}}"> <i class="fa fa-eye"></i> See Points</a>
                                   @endif
                               </div>
                             </td>

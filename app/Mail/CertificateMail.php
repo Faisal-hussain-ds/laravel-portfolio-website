@@ -14,14 +14,14 @@ class CertificateMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $mailData;
+    public $data2;
   
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData)
+    public function __construct($data2)
     {
-        $this->mailData = $mailData;
+        $this->data2 = $data2;
     }
 
     /**
@@ -42,7 +42,7 @@ class CertificateMail extends Mailable
         
         return new Content(
             view: 'auth.certificate_email',
-            with: $this->mailData
+            with: $this->data2
         );
     }
 
@@ -54,7 +54,7 @@ class CertificateMail extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromData(fn () => $this->mailData['pdf']->output(), 'Certificate.pdf')
+            Attachment::fromData(fn () => $this->data2['pdf']->output(), 'Certificate.pdf')
                 ->withMime('application/pdf'),
         ];
     }

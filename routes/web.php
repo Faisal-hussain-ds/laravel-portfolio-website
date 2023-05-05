@@ -24,6 +24,8 @@ Route::name('admin.')->middleware('auth')->group(function () {
     Route::get('/pages', [DashboardController::class,'pages'])->name('pages');
     Route::get('/request/detail/{id}', [DashboardController::class,'requestDetail'])->name('request.detail');
     Route::get('/request/certificate/{id}', [DashboardController::class,'certificateRequest'])->name('request.certificate');
+    Route::get('/send/points/{id}', [DashboardController::class,'sendPoints'])->name('send.points');
+    Route::post('/send/points-to-student', [DashboardController::class,'sendPointsToStudent'])->name('send.points.student');
     Route::post('/send/certificate', [DashboardController::class,'certificateEmail'])->name('send.certificate');
 
 

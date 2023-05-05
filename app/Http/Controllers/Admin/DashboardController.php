@@ -118,6 +118,27 @@ class DashboardController extends Controller
         $id=$id;
         return view ('admin.pages.certificate_request',get_defined_vars());
     }
+    public function sendPoints($id)
+    {
+        $id=$id;
+        $data=InternshipRequest::findOrfail(decrypt($id));
+        $data=json_decode($data->student_points);
+
+        return view ('admin.pages.send_points',get_defined_vars());
+    }
+    public function sendPointsToStudent(Request $request)
+    {
+        // dd($request->all());
+
+        $newRequest = \Illuminate\Http\Request::capture();
+        $newRequest->replace($request->except(['_token','internship_id']));
+        $data=InternshipRequest::findOrfail(decrypt($request->internship_id));
+  
+         $data->student_points=json_encode($newRequest->all())??'';
+         $data->save();
+        return redirect()->route('admin.pages')->with('message','Points has been sent Successfully');
+    }
+
     public function aboutPage()
     {
         return view ('admin.pages.about');
