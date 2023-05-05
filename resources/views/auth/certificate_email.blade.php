@@ -46,6 +46,7 @@
     </head>
     <body>
         <div class="container">
+            
             <div class="logo">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWXQ1S0JX3vUu4QTdzK-OjCaA-Gr-OxTEayw&usqp=CAU"></img>
             </div>
@@ -60,13 +61,13 @@
 
             <div class="person">
            
-               {{ $data2['name']??''}}
+               {{ $name ?? $data2['name']??''}}
             </div>
 
             <div class="reason">
-                for completing course of {{ $data2['course']??''}}<br/>
-                From <span class="assignment">{{ $data2['start_date']??''}} </span> To  <span class="assignment">{{ $data2['end_date']??''}} </span><br/>
-                with score of <b> {{ $data2['score']??''}}/100</b>
+                for completing course of {{ $course ?? $data2['course']??''}}<br/>
+                From <span class="assignment">{{ $start_date ?? $data2['start_date']??''}} </span> To  <span class="assignment">{{ $end_date ?? $data2['end_date']??''}} </span><br/>
+                with score of <b> {{ $score ?? $data2['score']??''}}/100</b>
             </div>
         </div>
     </body>
