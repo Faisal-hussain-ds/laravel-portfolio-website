@@ -49,6 +49,8 @@
                               
                                 <option value="student">Student</option>
                                 <option value="supervisor">Supervisor</option>
+                                <option value="head">Head</option>
+                                <option value="admin">Admin</option>
                             </select>
                         </div>
                       </div>

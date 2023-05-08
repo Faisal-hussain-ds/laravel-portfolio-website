@@ -49,6 +49,8 @@
                               
                        
                                 <option @if($user->type=='student') selected @endif  value="student">Student</option>
+                                <option @if($user->type=='head') selected @endif  value="supervisor">Head</option>
+                                <option @if($user->type=='admin') selected @endif  value="student">Admin</option>
                     
                                 <option @if($user->type=='supervisor') selected @endif  value="supervisor">Supervisor</option>
                             </select>

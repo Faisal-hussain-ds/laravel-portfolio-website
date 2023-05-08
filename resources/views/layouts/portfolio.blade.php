@@ -547,14 +547,9 @@ label{
                               <input type="text" name="faculty" required require>
                           </div>
                           <div class="input-div"> 
-                          <label><b>Department Name</b></label>
+                                <label><b>Department Name</b></label>
                              
-                              <select class="form-control" name="department" required>
-                                <option value="" selected disabled>Select Department</option>
-                                @foreach(Helper::getDepartments() as $item)
-                                <option value="{{$item->name}}">{{$item->name}}</option>
-                                @endforeach
-                              </select>
+                                <input type="text" name="department" required require>
                             
                           </div>
                       </div>
@@ -643,8 +638,8 @@ label{
                       </svg>
                       
                       <div class="text congrats">
-                          <h2>Congratulations!</h2>
-                          <p>Thanks Mr./Mrs. <span class="shown_name"></span> your information have been submitted successfully for the future reference we will contact you soon.</p>
+                          <h2>Processing...!</h2>
+                          <p>Thanks Mr./Mrs. <span class="shown_name"></span> your information have been submitting, Please wait page will redirect you to the dashboard.</p>
                       </div>
                   </div>
                   

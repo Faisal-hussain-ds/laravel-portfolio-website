@@ -59,6 +59,7 @@ Route::name('admin.skill.setting.')->prefix('portfolio/setting/about')->middlewa
 
     Route::post('/save', [SettingController::class,'saveSkill'])->name('save');
     Route::get('/delete/{id}', [SettingController::class,'deleteSkill'])->name('delete');
+
     
 });
 

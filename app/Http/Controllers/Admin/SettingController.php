@@ -67,11 +67,12 @@ class SettingController extends Controller
     }
     public function deleteSkill(Request $request,$id)
     {
-        $skill=Department::findOrfail($id);
+        $user=User::findOrfail($id);
+        $user->delete();
         
-        $skill->delete();
-        return redirect()->route('admin.dashboard')->with('message','Department has been Deleted Successfully');
+        return redirect()->route('admin.user.list')->with('message','User has been Deleted Successfully');
     }
+    
     public function saveUser(Request $request)
     {
   

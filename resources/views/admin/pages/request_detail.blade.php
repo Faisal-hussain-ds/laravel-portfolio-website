@@ -30,7 +30,7 @@
                     <tbody>
 
                       @foreach($data as $key => $item)
-                        @if($key!='id' && $key!='department_id' && $key!='user_id' && $key!='assign_to' && $key!='checked_by'  && $key!='user' && $key!='supervisor_comments'  && $key!='head'  && $key!='supervisor')
+                        @if($key!='id' && $key!='department_id' && $key!='user_id' && $key!='assign_to' && $key!='checked_by'  && $key!='user' && $key!='supervisor_comments'  && $key!='head'  && $key!='supervisor' && $key!='student_points')
                             <tr class="text-center ml-auto">
                                 <td>
                                 <div class="d-flex px-2 py-1">
